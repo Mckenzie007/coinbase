@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coinbase Support Center</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-blue: #1652F0;
+            --dark-blue: #0a46e4;
+            --light-blue: #f0f5ff;
+            --dark-gray: #1a1a1a;
+            --mid-gray: #4d4d4d;
+            --light-gray: #f8f9fa;
+            --border-gray: #e0e0e0;
+            --success: #00d395;
+            --warning: #ffc107;
+            --danger: #ff4d4f;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            --card-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+            --bg-color: #ffffff;
+            --text-color: #1a1a1a;
+            --card-bg: #ffffff;
+            --header-bg: #ffffff;
+            --footer-bg: #1a1a1a;
+            --section-bg: #f8f9fa;
+            --hero-bg: #f0f5ff;
+        }
+        
+        .dark-mode {
+            --primary-blue: #4a7cff;
+            --dark-blue: #3a6cff;
+            --light-blue: #0f1c3d;
+            --dark-gray: #e0e0e0;
+            --mid-gray: #b0b0b0;
+            --light-gray: #2a2a2a;
+            --border-gray: #444444;
+            --bg-color: #121212;
+            --text-color: #f0f0f0;
+            --card-bg: #1e1e1e;
+            --header-bg: #1a1a1a;
+            --footer-bg: #0a0a0a;
+            --section-bg: #1a1a1a;
+            --hero-bg: #0f1c3d;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            --card-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: var(--header-bg);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 24px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background-color: var(--primary-blue);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        
+        .logo h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary-blue);
+        }
+        
+        .nav-controls {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .theme-toggle {
+            background: transparent;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 1.2rem;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .theme-toggle:hover {
+            background-color: var(--light-gray);
+        }
+        
+        .btn {
+            padding: 10px 18px;
+            border-radius: 6px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+            font-size: 14px;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-blue);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--dark-blue);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(22, 82, 240, 0.3);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background-color: var(--hero-bg);
+            padding: 80px 24px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--text-color);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--mid-gray);
+            margin-bottom: 30px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .search-container {
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 16px 20px;
+            border: 1px solid var(--border-gray);
+            border-radius: 8px;
+            font-size: 16px;
+            padding-left: 50px;
+            box-shadow: var(--shadow);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+        }
+        
+        .search-icon {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--mid-gray);
+        }
+        
+        /* Help Sections */
+        .help-section {
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 0 24px;
+        }
+        
+        .section-header {
+            margin-bottom: 32px;
+            text-align: center;
+        }
+        
+        .section-header h3 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--text-color);
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+        
+        .section-header h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--primary-blue);
+            border-radius: 2px;
+        }
+        
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 24px;
+        }
+        
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-gray);
+            border-radius: 12px;
+            padding: 24px;
+            transition: all 0.3s ease;
+            box-shadow: var(--card-shadow);
+        }
+        
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+            border-color: var(--primary-blue);
+        }
+        
+        .card-icon {
+            background-color: var(--light-blue);
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        
+        .card-icon i {
+            color: var(--primary-blue);
+            font-size: 24px;
+        }
+        
+        .card h4 {
+            font-size: 1.2rem;
+            margin-bottom: 12px;
+            color: var(--text-color);
+        }
+        
+        .card p {
+            color: var(--mid-gray);
+            margin-bottom: 15px;
+        }
+        
+        /* Popular Articles */
+        .popular-articles {
+            background-color: var(--section-bg);
+            padding: 60px 24px;
+        }
+        
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 24px;
+        }
+        
+        .article-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 24px;
+            border: 1px solid var(--border-gray);
+            box-shadow: var(--card-shadow);
+            transition: all 0.3s;
+        }
+        
+        .article-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+            border-color: var(--primary-blue);
+        }
+        
+        .article-card h4 {
+            font-size: 1.1rem;
+            margin-bottom: 12px;
+            color: var(--text-color);
+        }
+        
+        .article-card p {
+            color: var(--mid-gray);
+            margin-bottom: 20px;
+        }
+        
+        /* Contact Section */
+        .contact-section {
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 0 24px;
+            text-align: center;
+        }
+        
+        .contact-cards {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .contact-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-gray);
+            border-radius: 12px;
+            padding: 30px;
+            width: 280px;
+            transition: all 0.3s;
+            box-shadow: var(--card-shadow);
+        }
+        
+        .contact-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-blue);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+        }
+        
+        .contact-card i {
+            font-size: 36px;
+            color: var(--primary-blue);
+            margin-bottom: 20px;
+        }
+        
+        .contact-card h4 {
+            font-size: 1.2rem;
+            margin-bottom: 12px;
+            color: var(--text-color);
+        }
+        
+        .contact-card p {
+            color: var(--mid-gray);
+            margin-bottom: 20px;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--footer-bg);
+            color: white;
+            padding: 60px 24px 30px;
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+        }
+        
+        .footer-column h4 {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            font-weight: 600;
+            color: white;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-column a {
+            color: #b3b3b3;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        .footer-column a:hover {
+            color: white;
+        }
+        
+        .copyright {
+            max-width: 1200px;
+            margin: 40px auto 0;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+            color: #b3b3b3;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+        
+        /* Virtual Assistant */
+        .chat-container {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+        }
+        
+        .chat-button {
+            background-color: var(--primary-blue);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 6px 16px rgba(22, 82, 240, 0.3);
+            transition: all 0.3s;
+            animation: pulse 2s infinite;
+        }
+        
+        .chat-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(22, 82, 240, 0.4);
+            animation: none;
+        }
+        
+        .chat-button i {
+            font-size: 24px;
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(22, 82, 240, 0.4); }
+            70% { box-shadow: 0 0 0 12px rgba(22, 82, 240, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(22, 82, 240, 0); }
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .nav-controls {
+                margin-top: 15px;
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .contact-cards {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .card-grid, .articles-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+<link type="text/css" rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <div class="logo-icon">C</div>
+                <h1>Coinbase Support</h1>
+            </div>
+            <div class="nav-controls">
+                <button class="theme-toggle" id="themeToggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="btn btn-primary" id="openChat">Contact Support</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h2>How can we help you today?</h2>
+            <p>Find answers to your questions or get in touch with our support team</p>
+            <div class="search-container">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" class="search-input" placeholder="Search help articles...">
+            </div>
+        </div>
+    </section>
+
+    <!-- Help Categories -->
+    <section class="help-section">
+        <div class="section-header">
+            <h3>Help Topics</h3>
+        </div>
+        <div class="card-grid">
+            <div class="card">
+                <div class="card-icon">
+                    <i class="fas fa-user-circle"></i>
+                </div>
+                <h4>Account Setup</h4>
+                <p>Coinbase makes account setup simple. Create your account in minutes with just an email and password. Our platform guides you through identity verification to ensure security and compliance.</p>
+                <p>Once verified, you can start trading cryptocurrencies with ease.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">
+                    <i class="fas fa-wallet"></i>
+                </div>
+                <h4>Buying & Selling</h4>
+                <p>Buying and selling cryptocurrencies on Coinbase is straightforward. Our intuitive interface allows you to trade with various payment methods including bank transfers and debit cards.</p>
+                <p>Real-time market data helps you make informed trading decisions.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h4>Security</h4>
+                <p>Coinbase employs industry-leading security measures to protect your assets. We store 98% of customer funds offline in cold storage and use AES-256 encryption for all data.</p>
+                <p>Two-factor authentication adds an extra layer of security to your account.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">
+                    <i class="fas fa-exchange-alt"></i>
+                </div>
+                <h4>Transactions</h4>
+                <p>Send and receive cryptocurrencies quickly with Coinbase. Our platform provides clear transaction details including fees and estimated completion times.</p>
+                <p>Track your transaction history with detailed records for all your crypto activities.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Popular Articles -->
+    <section class="popular-articles">
+        <div class="help-section">
+            <div class="section-header">
+                <h3>Popular Articles</h3>
+            </div>
+            <div class="articles-grid">
+                <div class="article-card">
+                    <h4>How to verify my identity on Coinbase</h4>
+                    <p>Step-by-step guide to completing identity verification for your account. Learn how to upload documents and troubleshoot common verification issues.</p>
+                </div>
+                <div class="article-card">
+                    <h4>Troubleshooting account access issues</h4>
+                    <p>Solutions for common problems when accessing your Coinbase account. Reset passwords, recover accounts, and resolve 2FA problems.</p>
+                </div>
+                <div class="article-card">
+                    <h4>Understanding cryptocurrency transaction fees</h4>
+                    <p>Learn about the fees associated with buying, selling, and converting crypto. Understand network fees and how to minimize costs.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section">
+        <div class="section-header">
+            <h3>Contact Support</h3>
+            <p>Our team is ready to assist you with any questions or issues</p>
+        </div>
+        <div class="contact-cards">
+            <div class="contact-card">
+                <i class="fas fa-comments"></i>
+                <h4>Chat Support</h4>
+                <p>Chat with our support team 24/7 for quick assistance</p>
+                <button class="btn btn-primary" id="openChat2">Start Chat</button>
+            </div>
+            <div class="contact-card">
+                <i class="fas fa-envelope"></i>
+                <h4>Email Support</h4>
+                <p>Send us an email and we'll respond within 24 hours</p>
+                <button class="btn btn-primary">Send Email</button>
+            </div>
+            <div class="contact-card">
+                <i class="fas fa-phone-alt"></i>
+                <h4>Phone Support</h4>
+                <p>Call us during business hours for immediate assistance</p>
+                <button class="btn btn-primary">Call Now</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-column">
+                <h4>Products</h4>
+                <ul>
+                    <li><a href="https://help.coinbase.com/en/coinbase/products">Coinbase</a></li>
+                    <li><a href="https://help.coinbase.com/en/pro">Coinbase Pro</a></li>
+                    <li><a href="https://help.coinbase.com/en/wallet">Coinbase Wallet</a></li>
+                    <li><a href="https://help.coinbase.com/en/card">Coinbase Card</a></li>
+                    <li><a href="https://commerce.coinbase.com/">Coinbase Commerce</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="https://help.coinbase.com/">Help Center</a></li>
+                    <li><a href="https://community.coinbase.com/">Community</a></li>
+                    <li><a href="https://status.coinbase.com/">Status</a></li>
+                    <li><a href="https://blog.coinbase.com/">Blog</a></li>
+                    <li><a href="https://www.coinbase.com/tax">Tax Center</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="https://www.coinbase.com/about">About</a></li>
+                    <li><a href="https://www.coinbase.com/careers">Careers</a></li>
+                    <li><a href="https://www.coinbase.com/press">Press</a></li>
+                    <li><a href="https://www.coinbase.com/legal">Legal & Privacy</a></li>
+                    <li><a href="https://www.coinbase.com/legal/cookie">Cookie Policy</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Social</h4>
+                <ul>
+                    <li><a href="https://twitter.com/coinbase">Twitter</a></li>
+                    <li><a href="https://www.facebook.com/Coinbase/">Facebook</a></li>
+                    <li><a href="https://www.instagram.com/coinbase/">Instagram</a></li>
+                    <li><a href="https://www.linkedin.com/company/coinbase/">LinkedIn</a></li>
+                    <li><a href="https://www.youtube.com/user/coinbase">YouTube</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 Coinbase. All rights reserved. Coinbase is a registered trademark of Coinbase, Inc.</p>
+        </div>
+    </footer>
+
+    <!-- Virtual Assistant -->
+    <div class="chat-container">
+        <div class="chat-button" id="chatToggle">
+            <i class="fas fa-comment-dots"></i>
+        </div>
+    </div>
+
+    <!-- Chaport Installation Script -->
+    <script>
+        // Toggle dark mode
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+        
+        // Check for saved theme preference
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            body.classList.add('dark-mode');
+            themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+        }
+        
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            
+            if (body.classList.contains('dark-mode')) {
+                themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+                localStorage.setItem('theme', 'dark');
+            } else {
+                themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+                localStorage.setItem('theme', 'light');
+            }
+        });
+        
+        // Simulate Chaport integration
+        function openChatbot() {
+            alert("Chat support opened! In a real implementation, this would launch the Chaport chatbot.");
+            
+            // In a real implementation, you would use:
+            // window.chaport.q('show');
+        }
+        
+        // Attach event listeners to chat buttons
+        document.getElementById('openChat').addEventListener('click', openChatbot);
+        document.getElementById('openChat2').addEventListener('click', openChatbot);
+        document.getElementById('chatToggle').addEventListener('click', openChatbot);
+        
+        // Search functionality
+        const searchInput = document.querySelector('.search-input');
+        searchInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                const query = searchInput.value.trim();
+                if (query) {
+                    alert(`Searching for: ${query}\nResults would be displayed here in a real implementation.`);
+                }
+            }
+        });
+        
+        // Add hover animations to cards
+        const cards = document.querySelectorAll('.card, .article-card, .contact-card');
+        cards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transition = 'transform 0.3s ease, box-shadow 0.3s ease';
+            });
+        });
+    </script>
+    
+    <!-- Chaport Installation Script -->
+    <!-- 
+    <script type="text/javascript">
+        (function(w,d,v3){
+            w.chaportConfig = {
+                appId : '68896c5f14b2180dd4889fdd'
+            };
+            if(w.chaport)return;
+            v3=w.chaport={};
+            v3._q=[];
+            v3._l={};
+            v3.q=function(){v3._q.push(arguments)};
+            v3.on=function(e,fn){if(!v3._l[e])v3._l[e]=[];v3._l[e].push(fn)};
+            var s=d.createElement('script');
+            s.type='text/javascript';
+            s.async=true;
+            s.src='https://app.chaport.com/javascripts/insert.js';
+            var ss=d.getElementsByTagName('script')[0];
+            ss.parentNode.insertBefore(s,ss)
+        })(window, document);
+    </script>
+    -->
+<script type="text/javascript" src="js/script.js"></script>
+</body>
+</html>
