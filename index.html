@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Coinbase Support Center</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🅒</text></svg>">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -19,12 +20,33 @@
             --warning: #ffc107;
             --danger: #ff4d4f;
             --shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-            
-            /* Dark mode variables */
-            --bg-dark: #121212;
-            --card-dark: #1e1e1e;
-            --text-dark: #e0e0e0;
-            --border-dark: #333;
+            --card-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+            --bg-color: #ffffff;
+            --text-color: #1a1a1a;
+            --card-bg: #ffffff;
+            --header-bg: #ffffff;
+            --footer-bg: #1a1a1a;
+            --section-bg: #f8f9fa;
+            --hero-bg: #f0f5ff;
+        }
+        
+        .dark-mode {
+            --primary-blue: #4a7cff;
+            --dark-blue: #3a6cff;
+            --light-blue: #0f1c3d;
+            --dark-gray: #e0e0e0;
+            --mid-gray: #b0b0b0;
+            --light-gray: #2a2a2a;
+            --border-gray: #444444;
+            --bg-color: #121212;
+            --text-color: #f0f0f0;
+            --card-bg: #1e1e1e;
+            --header-bg: #1a1a1a;
+            --footer-bg: #0a0a0a;
+            --section-bg: #1a1a1a;
+            --hero-bg: #0f1c3d;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            --card-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
         }
         
         * {
@@ -36,73 +58,18 @@
         
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background-color: #fff;
-            color: var(--dark-gray);
+            background-color: var(--bg-color);
+            color: var(--text-color);
             line-height: 1.6;
-            padding-top: 60px; /* Space for warning banner */
         }
         
-        body.dark-mode {
-            background-color: var(--bg-dark);
-            color: var(--text-dark);
-        }
-        
-        /* Warning Notification Banner */
-        .warning-banner {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background-color: var(--primary-blue);
-            color: white;
-            padding: 15px 50px 15px 20px;
-            text-align: center;
-            font-weight: 500;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            transform: translateY(-100%);
-            transition: transform 0.4s ease;
-        }
-        
-        .warning-banner.show {
-            transform: translateY(0);
-        }
-        
-        .warning-banner .close-banner {
-            position: absolute;
-            right: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: transparent;
-            border: none;
-            color: white;
-            font-size: 18px;
-            cursor: pointer;
-            width: 24px;
-            height: 24px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-        }
-        
-        .warning-banner .close-banner:hover {
-            background: rgba(255,255,255,0.2);
-        }
-        
-        /* Coinbase Header */
+        /* Header Styles */
         header {
-            background-color: white;
+            background-color: var(--header-bg);
             box-shadow: var(--shadow);
             position: sticky;
-            top: 60px;
+            top: 0;
             z-index: 100;
-            border-bottom: 1px solid var(--border-gray);
-        }
-        
-        body.dark-mode header {
-            background-color: var(--card-dark);
-            border-bottom: 1px solid var(--border-dark);
         }
         
         .header-container {
@@ -114,171 +81,96 @@
             padding: 16px 24px;
         }
         
-        .logo-container {
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background-color: var(--primary-blue);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        
+        .logo h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        
+        .coinbase-text {
+            color: var(--primary-blue);
+        }
+        
+        .support-text {
+            color: #4d4d4d; /* Light black/gray as per Coinbase style */
+        }
+        
+        .dark-mode .support-text {
+            color: #b0b0b0; /* Lighter gray in dark mode */
+        }
+        
+        .nav-controls {
             display: flex;
             align-items: center;
             gap: 15px;
         }
         
-        .coinbase-logo {
-            position: relative;
-            width: 160px;
-            height: 32px;
-        }
-        
-        .coinbase-logo .cb-logo {
-            position: absolute;
-            width: 32px;
-            height: 32px;
-            background: linear-gradient(135deg, #1652F0 0%, #0A46E4 100%);
-            border-radius: 6px;
+        .theme-toggle {
+            background: transparent;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 1.2rem;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
         }
         
-        .coinbase-logo .cb-logo::before {
-            content: "C";
-            font-weight: 700;
-            font-size: 18px;
-            color: white;
-        }
-        
-        .coinbase-logo .logo-text {
-            position: absolute;
-            left: 42px;
-            font-weight: 700;
-            font-size: 20px;
-            color: var(--dark-gray);
-            letter-spacing: -0.5px;
-        }
-        
-        body.dark-mode .coinbase-logo .logo-text {
-            color: var(--text-dark);
-        }
-        
-        .support-text {
-            font-weight: 500;
-            color: var(--mid-gray);
-            font-size: 18px;
-            position: relative;
-            padding-left: 15px;
-        }
-        
-        body.dark-mode .support-text {
-            color: #aaa;
-        }
-        
-        .support-text::before {
-            content: "";
-            position: absolute;
-            left: 0;
-            top: 50%;
-            transform: translateY(-50%);
-            height: 24px;
-            width: 1px;
-            background-color: var(--border-gray);
-        }
-        
-        body.dark-mode .support-text::before {
-            background-color: var(--border-dark);
-        }
-        
-        /* Theme Toggle */
-        .theme-toggle {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .toggle-container {
-            position: relative;
-            width: 50px;
-            height: 24px;
-        }
-        
-        .toggle-checkbox {
-            display: none;
-        }
-        
-        .toggle-label {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 50px;
-            height: 24px;
-            background-color: #ccc;
-            border-radius: 34px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        
-        .toggle-label:after {
-            content: "";
-            position: absolute;
-            top: 2px;
-            left: 2px;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background-color: white;
-            transition: transform 0.3s;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-        }
-        
-        .toggle-checkbox:checked + .toggle-label {
-            background-color: var(--primary-blue);
-        }
-        
-        .toggle-checkbox:checked + .toggle-label:after {
-            transform: translateX(26px);
-        }
-        
-        .toggle-icon {
-            font-size: 20px;
+        .theme-toggle:hover {
+            background-color: var(--light-gray);
         }
         
         /* Hero Section */
         .hero {
-            background: linear-gradient(135deg, #f0f5ff 0%, #e6f0ff 100%);
+            background-color: var(--hero-bg);
             padding: 80px 24px;
             text-align: center;
-            border-bottom: 1px solid var(--border-gray);
-        }
-        
-        body.dark-mode .hero {
-            background: linear-gradient(135deg, #0a1c3a 0%, #0a2a5a 100%);
-            border-bottom: 1px solid var(--border-dark);
+            position: relative;
+            overflow: hidden;
         }
         
         .hero-content {
             max-width: 800px;
             margin: 0 auto;
+            position: relative;
+            z-index: 2;
         }
         
         .hero h2 {
             font-size: 2.5rem;
             font-weight: 700;
             margin-bottom: 20px;
-            color: var(--dark-gray);
-            letter-spacing: -0.5px;
-        }
-        
-        body.dark-mode .hero h2 {
-            color: var(--text-dark);
+            color: var(--text-color);
         }
         
         .hero p {
             font-size: 1.2rem;
             color: var(--mid-gray);
             margin-bottom: 30px;
-            max-width: 600px;
+            max-width: 700px;
             margin-left: auto;
             margin-right: auto;
-        }
-        
-        body.dark-mode .hero p {
-            color: #bbb;
         }
         
         .search-container {
@@ -295,20 +187,8 @@
             font-size: 16px;
             padding-left: 50px;
             box-shadow: var(--shadow);
-            transition: all 0.3s;
-            background-color: white;
-        }
-        
-        body.dark-mode .search-input {
-            background-color: var(--card-dark);
-            border-color: var(--border-dark);
-            color: var(--text-dark);
-        }
-        
-        .search-input:focus {
-            border-color: var(--primary-blue);
-            box-shadow: 0 0 0 3px rgba(22, 82, 240, 0.1);
-            outline: none;
+            background-color: var(--bg-color);
+            color: var(--text-color);
         }
         
         .search-icon {
@@ -317,10 +197,6 @@
             top: 50%;
             transform: translateY(-50%);
             color: var(--mid-gray);
-        }
-        
-        body.dark-mode .search-icon {
-            color: #aaa;
         }
         
         /* Help Sections */
@@ -337,23 +213,23 @@
         
         .section-header h3 {
             font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--dark-gray);
-            margin-bottom: 10px;
+            font-weight: 600;
+            color: var(--text-color);
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
         }
         
-        body.dark-mode .section-header h3 {
-            color: var(--text-dark);
-        }
-        
-        .section-header p {
-            color: var(--mid-gray);
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        
-        body.dark-mode .section-header p {
-            color: #aaa;
+        .section-header h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--primary-blue);
+            border-radius: 2px;
         }
         
         .card-grid {
@@ -363,24 +239,17 @@
         }
         
         .card {
-            background: white;
+            background: var(--card-bg);
             border: 1px solid var(--border-gray);
             border-radius: 12px;
             padding: 24px;
             transition: all 0.3s ease;
-            box-shadow: var(--shadow);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        body.dark-mode .card {
-            background: var(--card-dark);
-            border: 1px solid var(--border-dark);
+            box-shadow: var(--card-shadow);
         }
         
         .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+            transform: translateY(-8px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
             border-color: var(--primary-blue);
         }
         
@@ -395,10 +264,6 @@
             margin-bottom: 20px;
         }
         
-        body.dark-mode .card-icon {
-            background-color: rgba(22, 82, 240, 0.15);
-        }
-        
         .card-icon i {
             color: var(--primary-blue);
             font-size: 24px;
@@ -407,12 +272,7 @@
         .card h4 {
             font-size: 1.2rem;
             margin-bottom: 12px;
-            color: var(--dark-gray);
-            font-weight: 600;
-        }
-        
-        body.dark-mode .card h4 {
-            color: var(--text-dark);
+            color: var(--text-color);
         }
         
         .card p {
@@ -420,41 +280,10 @@
             margin-bottom: 15px;
         }
         
-        body.dark-mode .card p {
-            color: #bbb;
-        }
-        
-        .card-link {
-            display: flex;
-            align-items: center;
-            color: var(--primary-blue);
-            font-weight: 500;
-            text-decoration: none;
-            margin-top: 15px;
-        }
-        
-        .card-link i {
-            margin-left: 5px;
-            font-size: 12px;
-            transition: transform 0.3s;
-        }
-        
-        .card:hover .card-link i {
-            transform: translateX(3px);
-        }
-        
         /* Popular Articles */
         .popular-articles {
-            background-color: var(--light-gray);
+            background-color: var(--section-bg);
             padding: 60px 24px;
-            border-top: 1px solid var(--border-gray);
-            border-bottom: 1px solid var(--border-gray);
-        }
-        
-        body.dark-mode .popular-articles {
-            background-color: #1a1a1a;
-            border-top: 1px solid var(--border-dark);
-            border-bottom: 1px solid var(--border-dark);
         }
         
         .articles-grid {
@@ -464,80 +293,68 @@
         }
         
         .article-card {
-            background: white;
+            background: var(--card-bg);
             border-radius: 12px;
             padding: 24px;
             border: 1px solid var(--border-gray);
+            box-shadow: var(--card-shadow);
             transition: all 0.3s;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        body.dark-mode .article-card {
-            background: var(--card-dark);
-            border: 1px solid var(--border-dark);
         }
         
         .article-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
             border-color: var(--primary-blue);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.05);
         }
         
         .article-card h4 {
             font-size: 1.1rem;
             margin-bottom: 12px;
-            color: var(--dark-gray);
-            font-weight: 600;
-        }
-        
-        body.dark-mode .article-card h4 {
-            color: var(--text-dark);
+            color: var(--text-color);
         }
         
         .article-card p {
             color: var(--mid-gray);
             margin-bottom: 20px;
-            font-size: 0.95rem;
-        }
-        
-        body.dark-mode .article-card p {
-            color: #bbb;
         }
         
         .article-link {
-            display: flex;
+            display: inline-flex;
             align-items: center;
             color: var(--primary-blue);
-            font-weight: 500;
             text-decoration: none;
-            font-size: 0.95rem;
+            font-weight: 500;
+            gap: 6px;
+        }
+        
+        .article-link:hover {
+            text-decoration: underline;
+        }
+        
+        /* Hidden articles section */
+        .hidden-articles {
+            display: none;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 24px;
+            margin-top: 24px;
+        }
+        
+        .show-more-btn {
+            margin: 30px auto 0;
+            display: block;
+            background: transparent;
+            border: 2px solid var(--primary-blue);
+            color: var(--primary-blue);
+            padding: 10px 24px;
+            border-radius: 30px;
+            font-weight: 600;
             cursor: pointer;
+            transition: all 0.3s;
         }
         
-        .article-link i {
-            margin-left: 5px;
-            font-size: 12px;
-            transition: transform 0.3s;
-        }
-        
-        .article-link:hover i {
-            transform: translateX(3px);
-        }
-        
-        .article-full {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.5s ease;
-            color: var(--mid-gray);
-            margin-top: 15px;
-        }
-        
-        body.dark-mode .article-full {
-            color: #bbb;
-        }
-        
-        .article-full.expanded {
-            max-height: 1000px;
+        .show-more-btn:hover {
+            background-color: var(--primary-blue);
+            color: white;
         }
         
         /* Contact Section */
@@ -557,73 +374,43 @@
         }
         
         .contact-card {
-            background: white;
+            background: var(--card-bg);
             border: 1px solid var(--border-gray);
             border-radius: 12px;
             padding: 30px;
-            width: 280px;
+            width: 320px;
             transition: all 0.3s;
-            box-shadow: var(--shadow);
-        }
-        
-        body.dark-mode .contact-card {
-            background: var(--card-dark);
-            border: 1px solid var(--border-dark);
+            box-shadow: var(--card-shadow);
         }
         
         .contact-card:hover {
-            border-color: var(--primary-blue);
             transform: translateY(-5px);
+            border-color: var(--primary-blue);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
         }
         
         .contact-card i {
-            font-size: 36px;
+            font-size: 42px;
             color: var(--primary-blue);
             margin-bottom: 20px;
-            background: var(--light-blue);
-            width: 70px;
-            height: 70px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        
-        body.dark-mode .contact-card i {
-            background: rgba(22, 82, 240, 0.15);
         }
         
         .contact-card h4 {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             margin-bottom: 12px;
-            font-weight: 600;
-        }
-        
-        body.dark-mode .contact-card h4 {
-            color: var(--text-dark);
+            color: var(--text-color);
         }
         
         .contact-card p {
             color: var(--mid-gray);
-            margin-bottom: 20px;
-            font-size: 0.95rem;
-        }
-        
-        body.dark-mode .contact-card p {
-            color: #bbb;
+            margin-bottom: 25px;
         }
         
         /* Footer */
         footer {
-            background-color: var(--dark-gray);
+            background-color: var(--footer-bg);
             color: white;
             padding: 60px 24px 30px;
-        }
-        
-        body.dark-mode footer {
-            background-color: #0a0a0a;
         }
         
         .footer-container {
@@ -638,6 +425,7 @@
             font-size: 1.1rem;
             margin-bottom: 20px;
             font-weight: 600;
+            color: white;
         }
         
         .footer-column ul {
@@ -652,7 +440,6 @@
             color: #b3b3b3;
             text-decoration: none;
             transition: color 0.2s;
-            font-size: 0.95rem;
         }
         
         .footer-column a:hover {
@@ -674,24 +461,11 @@
             .header-container {
                 flex-direction: column;
                 gap: 20px;
-                padding: 16px;
             }
             
-            .articles-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .contact-cards {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .support-text {
-                display: none;
-            }
-            
-            .hero {
-                padding: 50px 16px;
+            .theme-toggle {
+                position: static;
+                margin-top: 15px;
             }
             
             .hero h2 {
@@ -702,58 +476,59 @@
                 font-size: 1rem;
             }
             
-            .card-grid {
+            .contact-cards {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .card-grid, .articles-grid {
                 grid-template-columns: 1fr;
+            }
+            
+            .footer-container {
+                grid-template-columns: 1fr;
+                gap: 30px;
             }
         }
         
         @media (max-width: 480px) {
+            .hero {
+                padding: 60px 16px;
+            }
+            
+            .hero h2 {
+                font-size: 1.8rem;
+            }
+            
             .help-section {
                 margin: 40px auto;
-                padding: 0 16px;
+            }
+            
+            .section-header h3 {
+                font-size: 1.5rem;
             }
             
             .popular-articles {
                 padding: 40px 16px;
             }
-            
-            .contact-section {
-                margin: 40px auto;
-            }
-            
-            .warning-banner {
-                padding: 12px 40px 12px 15px;
-                font-size: 14px;
-            }
         }
     </style>
 </head>
 <body>
-    <!-- Warning Banner -->
-    <div class="warning-banner" id="warningBanner">
-        Protect your account: Learn about security best practices and how to keep your account safe
-        <button class="close-banner" id="closeBanner">
-            <i class="fas fa-times"></i>
-        </button>
-    </div>
-
-    <!-- Coinbase Header -->
+    <!-- Header -->
     <header>
         <div class="header-container">
-            <div class="logo-container">
-                <div class="coinbase-logo">
-                    <div class="cb-logo"></div>
-                    <div class="logo-text">Coinbase</div>
-                </div>
-                <div class="support-text">Support</div>
+            <div class="logo">
+                <div class="logo-icon">C</div>
+                <h1>
+                    <span class="coinbase-text">Coinbase</span>
+                    <span class="support-text"> Support</span>
+                </h1>
             </div>
-            <div class="theme-toggle">
-                <i class="fas fa-sun toggle-icon"></i>
-                <div class="toggle-container">
-                    <input type="checkbox" id="themeToggle" class="toggle-checkbox">
-                    <label for="themeToggle" class="toggle-label"></label>
-                </div>
-                <i class="fas fa-moon toggle-icon"></i>
+            <div class="nav-controls">
+                <button class="theme-toggle" id="themeToggle">
+                    <i class="fas fa-moon"></i>
+                </button>
             </div>
         </div>
     </header>
@@ -762,7 +537,7 @@
     <section class="hero">
         <div class="hero-content">
             <h2>How can we help you today?</h2>
-            <p>Find answers to your questions or get in touch with our support team</p>
+            <p>Find answers to your questions in our comprehensive help center</p>
             <div class="search-container">
                 <i class="fas fa-search search-icon"></i>
                 <input type="text" class="search-input" placeholder="Search help articles...">
@@ -774,7 +549,6 @@
     <section class="help-section">
         <div class="section-header">
             <h3>Help Topics</h3>
-            <p>Browse our most common support categories</p>
         </div>
         <div class="card-grid">
             <div class="card">
@@ -783,7 +557,7 @@
                 </div>
                 <h4>Account Setup</h4>
                 <p>Coinbase makes account setup simple. Create your account in minutes with just an email and password. Our platform guides you through identity verification to ensure security and compliance.</p>
-                <a href="#" class="card-link">Learn more <i class="fas fa-chevron-right"></i></a>
+                <p>Once verified, you can start trading cryptocurrencies with ease.</p>
             </div>
             <div class="card">
                 <div class="card-icon">
@@ -791,7 +565,7 @@
                 </div>
                 <h4>Buying & Selling</h4>
                 <p>Buying and selling cryptocurrencies on Coinbase is straightforward. Our intuitive interface allows you to trade with various payment methods including bank transfers and debit cards.</p>
-                <a href="#" class="card-link">Learn more <i class="fas fa-chevron-right"></i></a>
+                <p>Real-time market data helps you make informed trading decisions.</p>
             </div>
             <div class="card">
                 <div class="card-icon">
@@ -799,7 +573,7 @@
                 </div>
                 <h4>Security</h4>
                 <p>Coinbase employs industry-leading security measures to protect your assets. We store 98% of customer funds offline in cold storage and use AES-256 encryption for all data.</p>
-                <a href="#" class="card-link">Learn more <i class="fas fa-chevron-right"></i></a>
+                <p>Two-factor authentication adds an extra layer of security to your account.</p>
             </div>
             <div class="card">
                 <div class="card-icon">
@@ -807,7 +581,7 @@
                 </div>
                 <h4>Transactions</h4>
                 <p>Send and receive cryptocurrencies quickly with Coinbase. Our platform provides clear transaction details including fees and estimated completion times.</p>
-                <a href="#" class="card-link">Learn more <i class="fas fa-chevron-right"></i></a>
+                <p>Track your transaction history with detailed records for all your crypto activities.</p>
             </div>
         </div>
     </section>
@@ -817,146 +591,104 @@
         <div class="help-section">
             <div class="section-header">
                 <h3>Popular Articles</h3>
-                <p>Frequently asked questions and solutions</p>
             </div>
             <div class="articles-grid">
                 <div class="article-card">
-                    <h4>What is Decentralization?</h4>
-                    <p>Understanding the core principle behind blockchain technology.</p>
-                    <div class="article-full">
-                        <p>Decentralization is the process of distributing power away from a central authority. In blockchain technology, this means that no single entity controls the entire network. Instead, control is distributed among many participants, making the system more democratic and resistant to censorship.</p>
-                        <p>Coinbase leverages decentralized technologies to provide you with access to a global financial system that is open to everyone, without needing to rely on traditional financial institutions.</p>
-                        <p>Key benefits of decentralization include:</p>
-                        <ul>
-                            <li>Increased security and resistance to attacks</li>
-                            <li>Greater transparency of transactions</li>
-                            <li>Reduced reliance on intermediaries</li>
-                            <li>Global accessibility</li>
-                        </ul>
-                    </div>
-                    <div class="article-link" data-target="0">
-                        <span>Learn more</span> <i class="fas fa-chevron-down"></i>
-                    </div>
+                    <h4>How to verify my identity on Coinbase</h4>
+                    <p>Step-by-step guide to completing identity verification for your account. Learn how to upload documents and troubleshoot common verification issues.</p>
+                    <a href="#" class="article-link">
+                        Read article <i class="fas fa-arrow-right"></i>
+                    </a>
                 </div>
                 <div class="article-card">
-                    <h4>How to Create a Coinbase Wallet</h4>
-                    <p>Step-by-step guide to setting up your cryptocurrency wallet.</p>
-                    <div class="article-full">
-                        <p>Creating a Coinbase Wallet is your first step to securely storing cryptocurrencies and exploring decentralized applications. Here's how to get started:</p>
-                        <ol>
-                            <li>Download the Coinbase Wallet app from the App Store or Google Play</li>
-                            <li>Open the app and tap "Create new wallet"</li>
-                            <li>Read and accept the terms of service</li>
-                            <li>Create a secure username that will be your Wallet username</li>
-                            <li>Back up your recovery phrase in a secure location</li>
-                            <li>Confirm your recovery phrase</li>
-                            <li>Set up your preferred security method (biometrics or PIN)</li>
-                        </ol>
-                        <p>Your Coinbase Wallet is now ready! You can receive cryptocurrency by sharing your wallet address, or explore the world of decentralized finance through the built-in dapp browser.</p>
-                    </div>
-                    <div class="article-link" data-target="1">
-                        <span>Learn more</span> <i class="fas fa-chevron-down"></i>
-                    </div>
+                    <h4>Troubleshooting account access issues</h4>
+                    <p>Solutions for common problems when accessing your Coinbase account. Reset passwords, recover accounts, and resolve 2FA problems.</p>
+                    <a href="#" class="article-link">
+                        Read article <i class="fas fa-arrow-right"></i>
+                    </a>
                 </div>
                 <div class="article-card">
-                    <h4>What is a Token on Coinbase?</h4>
-                    <p>Understanding digital assets on the Coinbase platform.</p>
-                    <div class="article-full">
-                        <p>Tokens are digital assets built on existing blockchains. On Coinbase, you can trade various types of tokens:</p>
-                        <p><strong>Cryptocurrencies:</strong> Digital currencies like Bitcoin (BTC) and Ethereum (ETH) that operate on their own blockchains.</p>
-                        <p><strong>ERC-20 Tokens:</strong> Tokens built on the Ethereum blockchain that represent assets or utilities. Examples include USDC, DAI, and UNI.</p>
-                        <p><strong>Stablecoins:</strong> Tokens pegged to stable assets like the US dollar to minimize volatility. Examples include USDC and DAI.</p>
-                        <p><strong>Utility Tokens:</strong> Provide access to a product or service within a specific ecosystem.</p>
-                        <p><strong>Governance Tokens:</strong> Allow holders to vote on decisions about a protocol's future.</p>
-                        <p>Coinbase carefully evaluates each token before listing to ensure it meets our security, compliance, and technical standards. You can view all supported tokens in your Coinbase account's "Assets" section.</p>
-                    </div>
-                    <div class="article-link" data-target="2">
-                        <span>Learn more</span> <i class="fas fa-chevron-down"></i>
-                    </div>
-                </div>
-                <div class="article-card">
-                    <h4>Understanding Cryptocurrency Transaction Fees</h4>
-                    <p>Learn about the fees associated with crypto transactions.</p>
-                    <div class="article-full">
-                        <p>Cryptocurrency transaction fees vary based on several factors:</p>
-                        <p><strong>Network Fees:</strong> Paid to miners or validators for processing transactions on the blockchain. These fluctuate based on network congestion.</p>
-                        <p><strong>Coinbase Fees:</strong> Our fee structure includes a spread of about 0.50% for cryptocurrency conversions and an additional Coinbase Fee based on payment method.</p>
-                        <p>Factors affecting fees:</p>
-                        <ul>
-                            <li>Payment method (bank transfer, debit card, etc.)</li>
-                            <li>Order size</li>
-                            <li>Market conditions</li>
-                            <li>Location and jurisdiction</li>
-                        </ul>
-                        <p>To minimize fees, consider using ACH bank transfers for deposits and limit transactions during periods of high network congestion. Always review fees before confirming any transaction.</p>
-                    </div>
-                    <div class="article-link" data-target="3">
-                        <span>Learn more</span> <i class="fas fa-chevron-down"></i>
-                    </div>
-                </div>
-                <div class="article-card">
-                    <h4>Securing Your Coinbase Account</h4>
-                    <p>Best practices to protect your cryptocurrency investments.</p>
-                    <div class="article-full">
-                        <p>Protecting your Coinbase account is crucial for safeguarding your cryptocurrency assets. Follow these security best practices:</p>
-                        <ol>
-                            <li><strong>Enable Two-Factor Authentication (2FA):</strong> Use an authenticator app for the highest level of security</li>
-                            <li><strong>Use a Strong Password:</strong> Create a unique password that you don't use elsewhere</li>
-                            <li><strong>Verify Email Notifications:</strong> Enable notifications for all account activity</li>
-                            <li><strong>Beware of Phishing:</strong> Always check URLs and never share your credentials</li>
-                            <li><strong>Use Whitelisting:</strong> Enable address whitelisting for withdrawals</li>
-                            <li><strong>Secure Your Recovery Phrase:</strong> Store it offline in multiple secure locations</li>
-                            <li><strong>Keep Software Updated:</strong> Ensure your OS and antivirus are current</li>
-                        </ol>
-                        <p>Coinbase also provides additional security features like the Vault for long-term storage and delayed withdrawals for added protection.</p>
-                    </div>
-                    <div class="article-link" data-target="4">
-                        <span>Learn more</span> <i class="fas fa-chevron-down"></i>
-                    </div>
-                </div>
-                <div class="article-card">
-                    <h4>How to Verify Your Identity</h4>
-                    <p>Complete the verification process to access all features.</p>
-                    <div class="article-full">
-                        <p>Identity verification is required to comply with financial regulations and to protect your account. Here's how to complete the process:</p>
-                        <ol>
-                            <li>Sign in to your Coinbase account</li>
-                            <li>Go to Settings > Personal Information</li>
-                            <li>Click "Verify Identity"</li>
-                            <li>Select your document type (driver's license, passport, or ID card)</li>
-                            <li>Upload clear photos of your document (front and back if applicable)</li>
-                            <li>Take a selfie for facial verification</li>
-                            <li>Submit and wait for verification (usually takes 1-5 minutes)</li>
-                        </ol>
-                        <p>Tips for successful verification:</p>
-                        <ul>
-                            <li>Use a well-lit area without glare</li>
-                            <li>Ensure all document details are visible</li>
-                            <li>Remove any covers from your ID</li>
-                            <li>Use a plain background for your selfie</li>
-                            <li>Make sure your face matches your ID photo</li>
-                        </ul>
-                        <p>If you encounter issues, our support team can assist you with the verification process.</p>
-                    </div>
-                    <div class="article-link" data-target="5">
-                        <span>Learn more</span> <i class="fas fa-chevron-down"></i>
-                    </div>
+                    <h4>Understanding cryptocurrency transaction fees</h4>
+                    <p>Learn about the fees associated with buying, selling, and converting crypto. Understand network fees and how to minimize costs.</p>
+                    <a href="#" class="article-link">
+                        Read article <i class="fas fa-arrow-right"></i>
+                    </a>
                 </div>
             </div>
+            
+            <!-- Hidden articles section -->
+            <div class="hidden-articles" id="hiddenArticles">
+                <div class="article-card">
+                    <h4>How to set up two-factor authentication</h4>
+                    <p>Secure your account with 2FA. Learn how to enable this important security feature using authenticator apps or security keys.</p>
+                    <a href="#" class="article-link">
+                        Read article <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+                <div class="article-card">
+                    <h4>Recovering a compromised account</h4>
+                    <p>Steps to take if you suspect unauthorized access to your Coinbase account. Learn how to regain control and secure your assets.</p>
+                    <a href="#" class="article-link">
+                        Read article <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+                <div class="article-card">
+                    <h4>Understanding crypto wallet types</h4>
+                    <p>Learn the differences between hot and cold wallets, and how Coinbase secures your digital assets.</p>
+                    <a href="#" class="article-link">
+                        Read article <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+                <div class="article-card">
+                    <h4>Tax reporting for cryptocurrency</h4>
+                    <p>Understand your tax obligations for crypto transactions. Learn how to generate tax reports from Coinbase.</p>
+                    <a href="#" class="article-link">
+                        Read article <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+                <div class="article-card">
+                    <h4>How to use Coinbase Pro</h4>
+                    <p>Guide to advanced trading features on Coinbase Pro. Learn about order types, charts, and trading tools.</p>
+                    <a href="#" class="article-link">
+                        Read article <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+                <div class="article-card">
+                    <h4>Staking cryptocurrency on Coinbase</h4>
+                    <p>Earn rewards by staking your crypto. Learn which assets are supported and how to start earning.</p>
+                    <a href="#" class="article-link">
+                        Read article <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <button class="show-more-btn" id="showMoreBtn">
+                <i class="fas fa-plus"></i> Show More Articles
+            </button>
         </div>
     </section>
 
     <!-- Contact Section -->
     <section class="contact-section">
         <div class="section-header">
-            <h3>Need more help?</h3>
-            <p>Our team is ready to assist you with any questions or issues</p>
+            <h3>Additional Support Resources</h3>
+            <p>Explore more ways to get help with your Coinbase account</p>
         </div>
         <div class="contact-cards">
             <div class="contact-card">
-                <i class="fas fa-comments"></i>
-                <h4>Chat Support</h4>
-                <p>Chat with our support team 24/7 for quick assistance</p>
+                <i class="fas fa-book"></i>
+                <h4>Help Center</h4>
+                <p>Browse our comprehensive library of articles and guides covering all Coinbase products and services.</p>
+            </div>
+            <div class="contact-card">
+                <i class="fas fa-users"></i>
+                <h4>Community Forum</h4>
+                <p>Connect with other Coinbase users and get answers to your questions from our active community.</p>
+            </div>
+            <div class="contact-card">
+                <i class="fas fa-file-alt"></i>
+                <h4>Developer Docs</h4>
+                <p>Access technical documentation for Coinbase APIs and developer tools to build with crypto.</p>
             </div>
         </div>
     </section>
@@ -967,58 +699,58 @@
             <div class="footer-column">
                 <h4>Products</h4>
                 <ul>
-                    <li><a href="#">Coinbase</a></li>
-                    <li><a href="#">Coinbase Pro</a></li>
-                    <li><a href="#">Coinbase Wallet</a></li>
-                    <li><a href="#">Coinbase Card</a></li>
-                    <li><a href="#">Coinbase Commerce</a></li>
+                    <li><a href="https://www.coinbase.com/individuals">Coinbase</a></li>
+                    <li><a href="https://pro.coinbase.com/">Coinbase Pro</a></li>
+                    <li><a href="https://wallet.coinbase.com/">Coinbase Wallet</a></li>
+                    <li><a href="https://www.coinbase.com/card">Coinbase Card</a></li>
+                    <li><a href="https://commerce.coinbase.com/">Coinbase Commerce</a></li>
                 </ul>
             </div>
             <div class="footer-column">
                 <h4>Resources</h4>
                 <ul>
-                    <li><a href="#">Help Center</a></li>
-                    <li><a href="#">Community</a></li>
-                    <li><a href="#">Status</a></li>
-                    <li><a href="#">Blog</a></li>
-                    <li><a href="#">Tax Center</a></li>
+                    <li><a href="https://help.coinbase.com/">Help Center</a></li>
+                    <li><a href="https://community.coinbase.com/">Community</a></li>
+                    <li><a href="https://status.coinbase.com/">Status</a></li>
+                    <li><a href="https://blog.coinbase.com/">Blog</a></li>
+                    <li><a href="https://www.coinbase.com/tax">Tax Center</a></li>
                 </ul>
             </div>
             <div class="footer-column">
                 <h4>Company</h4>
                 <ul>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Careers</a></li>
-                    <li><a href="#">Press</a></li>
-                    <li><a href="#">Legal & Privacy</a></li>
-                    <li><a href="#">Cookie Policy</a></li>
+                    <li><a href="https://www.coinbase.com/about">About</a></li>
+                    <li><a href="https://www.coinbase.com/careers">Careers</a></li>
+                    <li><a href="https://www.coinbase.com/press">Press</a></li>
+                    <li><a href="https://www.coinbase.com/legal">Legal & Privacy</a></li>
+                    <li><a href="https://www.coinbase.com/legal/cookie">Cookie Policy</a></li>
                 </ul>
             </div>
             <div class="footer-column">
                 <h4>Social</h4>
                 <ul>
-                    <li><a href="#">Twitter</a></li>
-                    <li><a href="#">Facebook</a></li>
-                    <li><a href="#">Instagram</a></li>
-                    <li><a href="#">LinkedIn</a></li>
-                    <li><a href="#">YouTube</a></li>
+                    <li><a href="https://twitter.com/coinbase">Twitter</a></li>
+                    <li><a href="https://www.facebook.com/Coinbase/">Facebook</a></li>
+                    <li><a href="https://www.instagram.com/coinbase/">Instagram</a></li>
+                    <li><a href="https://www.linkedin.com/company/coinbase/">LinkedIn</a></li>
+                    <li><a href="https://www.youtube.com/user/coinbase">YouTube</a></li>
                 </ul>
             </div>
         </div>
         <div class="copyright">
             <p>&copy; 2023 Coinbase. All rights reserved. Coinbase is a registered trademark of Coinbase, Inc.</p>
-            <p style="margin-top: 8px;">Cryptocurrency services are provided by Coinbase, Inc. and are not available in all jurisdictions.</p>
         </div>
     </footer>
 
     <!-- Chaport Installation Script -->
-    <!-- Begin of Chaport Live Chat code -->
-    <script type="text/javascript">
+    <script>
+        // Initialize Chaport
+        window.chaportConfig = {
+            appId: '68896c5f14b2180dd4889fdd'
+        };
+        
         (function(w,d,v3){
-            w.chaportConfig = {
-                appId : '68896c5f14b2180dd4889fdd'
-            };
-            if(w.chaport)return;
+            if(w.chaport) return;
             v3=w.chaport={};
             v3._q=[];
             v3._l={};
@@ -1029,83 +761,70 @@
             s.async=true;
             s.src='https://app.chaport.com/javascripts/insert.js';
             var ss=d.getElementsByTagName('script')[0];
-            ss.parentNode.insertBefore(s,ss)
+            ss.parentNode.insertBefore(s,ss);
         })(window, document);
-    </script>
-    <!-- End of Chaport Live Chat code -->
-    
-    <script>
-        // Dark Mode Toggle
+        
+        // Toggle dark mode
         const themeToggle = document.getElementById('themeToggle');
         const body = document.body;
         
-        themeToggle.addEventListener('change', function() {
-            if(this.checked) {
-                body.classList.add('dark-mode');
+        // Check for saved theme preference
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            body.classList.add('dark-mode');
+            themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+        }
+        
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            
+            if (body.classList.contains('dark-mode')) {
+                themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
                 localStorage.setItem('theme', 'dark');
             } else {
-                body.classList.remove('dark-mode');
+                themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
                 localStorage.setItem('theme', 'light');
             }
         });
         
-        // Check for saved theme preference
-        if(localStorage.getItem('theme') === 'dark') {
-            themeToggle.checked = true;
-            body.classList.add('dark-mode');
-        }
+        // Expandable articles functionality
+        const showMoreBtn = document.getElementById('showMoreBtn');
+        const hiddenArticles = document.getElementById('hiddenArticles');
         
-        // Article expansion functionality
-        const articleLinks = document.querySelectorAll('.article-link');
+        showMoreBtn.addEventListener('click', () => {
+            if (hiddenArticles.style.display === 'grid') {
+                hiddenArticles.style.display = 'none';
+                showMoreBtn.innerHTML = '<i class="fas fa-plus"></i> Show More Articles';
+            } else {
+                hiddenArticles.style.display = 'grid';
+                showMoreBtn.innerHTML = '<i class="fas fa-minus"></i> Show Less Articles';
+            }
+        });
         
-        articleLinks.forEach(link => {
-            link.addEventListener('click', function() {
-                const targetIndex = this.getAttribute('data-target');
-                const articleFull = this.parentElement.querySelector('.article-full');
-                const icon = this.querySelector('i');
-                
-                articleFull.classList.toggle('expanded');
-                
-                if(articleFull.classList.contains('expanded')) {
-                    icon.className = 'fas fa-chevron-up';
-                    this.querySelector('span').textContent = 'Show less';
-                } else {
-                    icon.className = 'fas fa-chevron-down';
-                    this.querySelector('span').textContent = 'Learn more';
+        // Search functionality
+        const searchInput = document.querySelector('.search-input');
+        searchInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                const query = searchInput.value.trim();
+                if (query) {
+                    alert(`Searching for: ${query}\nResults would be displayed here in a real implementation.`);
                 }
+            }
+        });
+        
+        // Add hover animations to cards
+        const cards = document.querySelectorAll('.card, .article-card, .contact-card');
+        cards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transition = 'transform 0.3s ease, box-shadow 0.3s ease';
             });
         });
         
-        // Warning banner functionality
-        const warningBanner = document.getElementById('warningBanner');
-        const closeBanner = document.getElementById('closeBanner');
-        
-        // Show banner initially
+        // Simulate dynamic content loading
         setTimeout(() => {
-            warningBanner.classList.add('show');
-        }, 1000);
-        
-        // Close banner
-        closeBanner.addEventListener('click', () => {
-            warningBanner.classList.remove('show');
-        });
-        
-        // Scroll direction detection for banner
-        let lastScrollTop = 0;
-        
-        window.addEventListener('scroll', function() {
-            const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
-            
-            if (currentScroll > lastScrollTop && currentScroll > 100) {
-                // Scrolling down
-                warningBanner.classList.remove('show');
-            } else if (currentScroll < lastScrollTop && currentScroll > 50) {
-                // Scrolling up
-                warningBanner.classList.add('show');
-            }
-            
-            lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
-        }, false);
+            const hero = document.querySelector('.hero');
+            hero.style.backgroundImage = "radial-gradient(circle at 20% 30%, rgba(22, 82, 240, 0.08) 0%, transparent 50%)";
+        }, 500);
     </script>
 </body>
 </html>
