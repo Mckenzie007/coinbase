@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Coinbase Support Center</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🅒</text></svg>">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -108,7 +109,7 @@
         .nav-controls {
             display: flex;
             align-items: center;
-            gap: 20px;
+            gap: 15px;
         }
         
         .theme-toggle {
@@ -137,6 +138,9 @@
             transition: all 0.2s;
             border: none;
             font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
         
         .btn-primary {
@@ -348,7 +352,7 @@
             border: 1px solid var(--border-gray);
             border-radius: 12px;
             padding: 30px;
-            width: 280px;
+            width: 320px;
             transition: all 0.3s;
             box-shadow: var(--card-shadow);
         }
@@ -360,20 +364,20 @@
         }
         
         .contact-card i {
-            font-size: 36px;
+            font-size: 42px;
             color: var(--primary-blue);
             margin-bottom: 20px;
         }
         
         .contact-card h4 {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             margin-bottom: 12px;
             color: var(--text-color);
         }
         
         .contact-card p {
             color: var(--mid-gray);
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
         
         /* Footer */
@@ -474,6 +478,8 @@
             
             .nav-controls {
                 margin-top: 15px;
+                width: 100%;
+                justify-content: flex-end;
             }
             
             .hero h2 {
@@ -494,7 +500,6 @@
             }
         }
     </style>
-<link type="text/css" rel="stylesheet" href="css/style.css"/>
 </head>
 <body>
     <!-- Header -->
@@ -505,10 +510,12 @@
                 <h1>Coinbase Support</h1>
             </div>
             <div class="nav-controls">
+                <button class="btn btn-primary" id="openChat">
+                    <i class="fas fa-comments"></i> Contact Support
+                </button>
                 <button class="theme-toggle" id="themeToggle">
                     <i class="fas fa-moon"></i>
                 </button>
-                <button class="btn btn-primary" id="openChat">Contact Support</button>
             </div>
         </div>
     </header>
@@ -517,7 +524,7 @@
     <section class="hero">
         <div class="hero-content">
             <h2>How can we help you today?</h2>
-            <p>Find answers to your questions or get in touch with our support team</p>
+            <p>Find answers to your questions or get instant help from our support team</p>
             <div class="search-container">
                 <i class="fas fa-search search-icon"></i>
                 <input type="text" class="search-input" placeholder="Search help articles...">
@@ -592,27 +599,17 @@
     <!-- Contact Section -->
     <section class="contact-section">
         <div class="section-header">
-            <h3>Contact Support</h3>
-            <p>Our team is ready to assist you with any questions or issues</p>
+            <h3>Get Support Instantly</h3>
+            <p>Our virtual assistant is available 24/7 to answer your questions</p>
         </div>
         <div class="contact-cards">
             <div class="contact-card">
                 <i class="fas fa-comments"></i>
                 <h4>Chat Support</h4>
-                <p>Chat with our support team 24/7 for quick assistance</p>
-                <button class="btn btn-primary" id="openChat2">Start Chat</button>
-            </div>
-            <div class="contact-card">
-                <i class="fas fa-envelope"></i>
-                <h4>Email Support</h4>
-                <p>Send us an email and we'll respond within 24 hours</p>
-                <button class="btn btn-primary">Send Email</button>
-            </div>
-            <div class="contact-card">
-                <i class="fas fa-phone-alt"></i>
-                <h4>Phone Support</h4>
-                <p>Call us during business hours for immediate assistance</p>
-                <button class="btn btn-primary">Call Now</button>
+                <p>Get instant help from our virtual assistant or connect with a live support agent</p>
+                <button class="btn btn-primary" id="openChat2">
+                    <i class="fas fa-comment"></i> Start Chat Now
+                </button>
             </div>
         </div>
     </section>
@@ -666,15 +663,40 @@
         </div>
     </footer>
 
-    <!-- Virtual Assistant -->
-    <div class="chat-container">
-        <div class="chat-button" id="chatToggle">
-            <i class="fas fa-comment-dots"></i>
-        </div>
-    </div>
+ 
 
     <!-- Chaport Installation Script -->
     <script>
+        // Initialize Chaport
+        window.chaportConfig = {
+            appId: '68896c5f14b2180dd4889fdd'
+        };
+        
+        (function(w,d,v3){
+            if(w.chaport) return;
+            v3=w.chaport={};
+            v3._q=[];
+            v3._l={};
+            v3.q=function(){v3._q.push(arguments)};
+            v3.on=function(e,fn){if(!v3._l[e])v3._l[e]=[];v3._l[e].push(fn)};
+            var s=d.createElement('script');
+            s.type='text/javascript';
+            s.async=true;
+            s.src='https://app.chaport.com/javascripts/insert.js';
+            var ss=d.getElementsByTagName('script')[0];
+            ss.parentNode.insertBefore(s,ss);
+        })(window, document);
+        
+        // Function to open Chaport chat
+        function openChatSupport() {
+            if (window.chaport) {
+                window.chaport.q('show');
+            } else {
+                // Fallback in case Chaport doesn't load
+                document.querySelector('.chat-button').click();
+            }
+        }
+        
         // Toggle dark mode
         const themeToggle = document.getElementById('themeToggle');
         const body = document.body;
@@ -698,18 +720,10 @@
             }
         });
         
-        // Simulate Chaport integration
-        function openChatbot() {
-            alert("Chat support opened! In a real implementation, this would launch the Chaport chatbot.");
-            
-            // In a real implementation, you would use:
-            // window.chaport.q('show');
-        }
-        
         // Attach event listeners to chat buttons
-        document.getElementById('openChat').addEventListener('click', openChatbot);
-        document.getElementById('openChat2').addEventListener('click', openChatbot);
-        document.getElementById('chatToggle').addEventListener('click', openChatbot);
+        document.getElementById('openChat').addEventListener('click', openChatSupport);
+        document.getElementById('openChat2').addEventListener('click', openChatSupport);
+        document.getElementById('chatToggle').addEventListener('click', openChatSupport);
         
         // Search functionality
         const searchInput = document.querySelector('.search-input');
@@ -729,30 +743,12 @@
                 card.style.transition = 'transform 0.3s ease, box-shadow 0.3s ease';
             });
         });
+        
+        // Simulate dynamic content loading
+        setTimeout(() => {
+            const hero = document.querySelector('.hero');
+            hero.style.backgroundImage = "radial-gradient(circle at 20% 30%, rgba(22, 82, 240, 0.08) 0%, transparent 50%)";
+        }, 500);
     </script>
-    
-    <!-- Chaport Installation Script -->
-    <!-- 
-    <script type="text/javascript">
-        (function(w,d,v3){
-            w.chaportConfig = {
-                appId : '68896c5f14b2180dd4889fdd'
-            };
-            if(w.chaport)return;
-            v3=w.chaport={};
-            v3._q=[];
-            v3._l={};
-            v3.q=function(){v3._q.push(arguments)};
-            v3.on=function(e,fn){if(!v3._l[e])v3._l[e]=[];v3._l[e].push(fn)};
-            var s=d.createElement('script');
-            s.type='text/javascript';
-            s.async=true;
-            s.src='https://app.chaport.com/javascripts/insert.js';
-            var ss=d.getElementsByTagName('script')[0];
-            ss.parentNode.insertBefore(s,ss)
-        })(window, document);
-    </script>
-    -->
-<script type="text/javascript" src="js/script.js"></script>
 </body>
 </html>
